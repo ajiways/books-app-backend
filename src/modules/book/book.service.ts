@@ -30,17 +30,17 @@ export class BookService {
   }
 
   async findOne(id: string) {
-    return await this.bookRepository.findOne(id);
+    const candidate = await this.bookRepository.findOne(id);
+
+    if (!candidate) {
+      throw new NotFoundException(`Book with id ${id} was not found`);
+    }
+
+    return candidate;
   }
 
   async update(updateBookDto: UpdateBookDto) {
     const candidate = await this.findOne(updateBookDto.id);
-
-    if (!candidate) {
-      throw new NotFoundException(
-        `Book with id ${updateBookDto.id} was not found`,
-      );
-    }
 
     const toSave = this.bookRepository.merge(candidate, {
       description: updateBookDto.description,
@@ -51,7 +51,7 @@ export class BookService {
   }
 
   async remove(id: string) {
-    const candidate = await this.findOne(id);
+    const candidate = await this.bookRepository.findOne(id);
 
     if (!candidate) {
       throw new NotFoundException(`Book with id ${id} was not found`);
