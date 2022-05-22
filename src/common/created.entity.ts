@@ -1,9 +1,9 @@
 import { CreateDateColumn, ObjectIdColumn, PrimaryColumn } from 'typeorm';
 
 export class CreatedEntity {
-  @ObjectIdColumn()
   @PrimaryColumn()
-  _id: string;
+  @ObjectIdColumn()
+  id: string;
 
   @CreateDateColumn()
   createdAt: Date;

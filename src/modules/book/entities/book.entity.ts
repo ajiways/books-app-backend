@@ -8,7 +8,4 @@ export class BookEntity extends CreatedEntity {
 
   @Column({ type: String, nullable: false })
   description: string;
-
-  @Column({ type: String, nullable: false })
-  logoSrc: string;
 }
