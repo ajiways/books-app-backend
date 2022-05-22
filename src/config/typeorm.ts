@@ -7,7 +7,7 @@ import { join } from 'path';
 export function getOrmConfig(): TypeOrmModuleOptions {
   return {
     type: 'mongodb',
-    url: '',
+    url: process.env.MONGO_URL,
     entities: [join(process.cwd(), '/dist/**/*.entity.js')],
     synchronize: true,
     useNewUrlParser: true,
