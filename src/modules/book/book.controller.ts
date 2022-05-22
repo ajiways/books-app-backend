@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -21,8 +22,13 @@ export class BookController {
   }
 
   @Get()
-  async findAll() {
-    return await this.bookService.findAll();
+  async findAll(@Query('page') page: string) {
+    const result = await this.bookService.findAll(+page);
+
+    //FIXME: См. books.api на фронте, оно просто отказывается работать.
+    // res.setHeader('X-Total-Count', result.totalCount);
+
+    return result;
   }
 
   @Get(':id')
