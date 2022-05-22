@@ -14,8 +14,19 @@ export class BookService {
     return await this.bookRepository.save(createBookDto);
   }
 
-  async findAll() {
-    return await this.bookRepository.find();
+  async findAll(page: number) {
+    const take = 7;
+    const skip = page === 1 ? 0 : (page - 1) * take;
+
+    const result = await this.bookRepository.findAndCount({
+      take,
+      skip,
+    });
+
+    return {
+      totalCount: result[1],
+      books: result[0],
+    };
   }
 
   async findOne(id: string) {
