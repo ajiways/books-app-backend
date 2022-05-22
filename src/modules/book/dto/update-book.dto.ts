@@ -1,7 +1,7 @@
-import { IsString, Length } from 'class-validator';
+import { IsMongoId, IsString, Length } from 'class-validator';
 
 export class UpdateBookDto {
-  @IsString()
+  @IsMongoId()
   id: string;
 
   @IsString()
@@ -9,6 +9,6 @@ export class UpdateBookDto {
   title: string;
 
   @IsString()
-  @Length(32, 256)
+  @Length(12, 256)
   description: string;
 }

@@ -1,9 +1,9 @@
-import { CreateDateColumn, ObjectIdColumn, PrimaryColumn } from 'typeorm';
+import { ObjectId } from 'mongoose';
+import { CreateDateColumn, ObjectIdColumn } from 'typeorm';
 
 export class CreatedEntity {
-  @PrimaryColumn()
   @ObjectIdColumn()
-  id: string;
+  _id: ObjectId;
 
   @CreateDateColumn()
   createdAt: Date;

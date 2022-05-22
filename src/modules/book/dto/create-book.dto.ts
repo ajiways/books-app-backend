@@ -1,4 +1,4 @@
-import { IsString, Length } from 'class-validator';
+import { ArrayMinSize, IsArray, IsString, Length } from 'class-validator';
 
 export class CreateBookDto {
   @IsString()
@@ -6,6 +6,11 @@ export class CreateBookDto {
   title: string;
 
   @IsString()
-  @Length(32, 256)
+  @Length(12, 256)
   description: string;
+
+  @IsArray()
+  @ArrayMinSize(1)
+  @IsString({ each: true })
+  authorIds: string[];
 }
